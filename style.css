@@ -1,0 +1,11 @@
+body {
+    color: rgb(244, 255, 254);
+    background-image: url(https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+}
