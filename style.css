@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -56,6 +57,7 @@ section {
     background-color:rgba(244, 255, 254, 0.815);
     color: #011f2c;
     border-radius: 5px;
+    padding: 5px;
 }
 section h2 {
     margin: 10px;
@@ -70,25 +72,50 @@ section h2 {
 }
 /*-----------------forecast article---------------*/
 .forecast-article {
-    background-color: #035f868f;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
     align-items: center;
+    width: 15%;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: rgba(210, 230, 228, 0.815);
+    box-shadow: 4px 8px 10px #035f8656; ;
 }
 
 .forecast-article h3 {
     margin: 10px;
 }
 
-img {
-    width: 75px;
+.weather-icon {
+    width: 100px;
 }
+
+.main-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.temperature, .description {
+    margin: 5px;
+}
+.temperature {
+    font-size: 2.5em;
+}
+.description {
+    text-transform: capitalize;
+}
+
 .icon {
     width:30px;
+    margin-bottom: 5px;
 }
 .icon-container {
     display: flex;
+    padding: 15px;
+    background-color: #035f8656;
+    border-radius: 0 0 5px 5px;
 }
 .pop, .humidity, .wind {
     display: flex;
@@ -103,4 +130,11 @@ footer {
     color: rgb(2, 59, 54);
     padding: 40px 30px;
     text-align: center;
+}
+
+/*---------------media queries------------------*/
+@media only screen and (max-width: 768px) {
+    .forecast-article {
+        width: 40%;
+    }
 }

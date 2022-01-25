@@ -35,50 +35,61 @@ function getWeather(event) {
         forecastCard.appendChild(forecastDay);
 
         const weatherIconURL = document.createElement("img");
+        weatherIconURL.className = "weather-icon"
         const weatherIcon= data.list[0].weather[0].icon;                        //gets icon that goes with description
-        weatherIconURL.src =  "http://openweathermap.org/img/wn/" + weatherIcon + ".png"; //gets image of icon
+        weatherIconURL.src =  "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"; //gets image of icon
         forecastCard.appendChild(weatherIconURL);
 
-        const temperature = document.createElement("span");
-        temperature.innerHTML = Math.round(data.list[0].main.temp) + "&deg;";   //round the number to nearest integer
-        forecastCard.appendChild(temperature);
+        const mainInfoContainer = document.createElement("div");
+        mainInfoContainer.className = "main-info"
+        forecastCard.appendChild(mainInfoContainer);
+
+            const temperature = document.createElement("span");
+            temperature.className = "temperature";
+            temperature.innerHTML = Math.round(data.list[0].main.temp) + "&deg;";   //round the number to nearest integer
+            mainInfoContainer.appendChild(temperature);
+
+            const description = document.createElement("span");
+            description.className = "description";
+            description.innerHTML = data.list[0].weather[0].description;
+            mainInfoContainer.appendChild(description);
 
 
         const iconContainer = document.createElement("div");
         iconContainer.className = "icon-container";
         forecastCard.appendChild(iconContainer);
 
-        const popContainer = document.createElement("span"); //pop = chance of rain or probability of precipitation
-        popContainer.className = "pop";
-        const popImg = document.createElement("img");
-        popImg.src = "./img/rain.png";
-        popImg.className = "icon";
-        popContainer.appendChild(popImg);
-        const pop = document.createElement("span");
-        pop.innerHTML = Math.round(data.list[0].pop) + "\u0025";
-        popContainer.appendChild(pop);
+            const popContainer = document.createElement("span"); //pop = chance of rain or probability of precipitation
+            popContainer.className = "pop";
+                const popImg = document.createElement("img");
+                popImg.src = "./img/rain.png";
+                popImg.className = "icon";
+                popContainer.appendChild(popImg);
+                const pop = document.createElement("span");
+                pop.innerHTML = Math.round(data.list[0].pop) + "\u0025";
+            popContainer.appendChild(pop);
         iconContainer.appendChild(popContainer);
-        
-        const humidityContainer = document.createElement("span");
-        humidityContainer.className = "humidity";
-        const humidityImg = document.createElement("img");
-        humidityImg.src = "./img/humidity.png";
-        humidityImg.className = "icon";
-        humidityContainer.appendChild(humidityImg);
-        const humidity = document.createElement("span");
-        humidity.innerHTML = data.list[0].main.humidity + "\u0025";
-        humidityContainer.appendChild(humidity);
+            
+            const humidityContainer = document.createElement("span");
+            humidityContainer.className = "humidity";
+                const humidityImg = document.createElement("img");
+                humidityImg.src = "./img/humidity.png";
+                humidityImg.className = "icon";
+                humidityContainer.appendChild(humidityImg);
+                const humidity = document.createElement("span");
+                humidity.innerHTML = data.list[0].main.humidity + "\u0025";
+            humidityContainer.appendChild(humidity);
         iconContainer.appendChild(humidityContainer);
 
-        const windContainer = document.createElement("span");
-        windContainer.className = "wind";
-        const windImg = document.createElement("img");
-        windImg.src = "./img/wind.png";
-        windImg.className = "icon";
-        windContainer.appendChild(windImg);
-        const wind = document.createElement("span");
-        wind.innerHTML = Math.round(data.list[0].wind.speed) + "km/h";
-        windContainer.appendChild(wind);
+            const windContainer = document.createElement("span");
+            windContainer.className = "wind";
+                const windImg = document.createElement("img");
+                windImg.src = "./img/wind.png";
+                windImg.className = "icon";
+                windContainer.appendChild(windImg);
+                const wind = document.createElement("span");
+                wind.innerHTML = Math.round(data.list[0].wind.speed) + "km/h";
+            windContainer.appendChild(wind);
         iconContainer.appendChild(windContainer);
    });
 }
