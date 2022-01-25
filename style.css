@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     height: 100vh;
     font-family: 'Nunito', sans-serif;
@@ -15,16 +20,26 @@ header {
 }
 main {
     height: 100vh;
+    margin: 20px 10px;
+}
+
+/*--------------form----------------*/
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 }
 
 input {
-    border:5px solid #035f86;
+    border:3px solid #035f86;
     border-radius: 5px;
 }
 
 button {
     background-color: transparent; 
     border: none;
+    margin: 10px;
 }
 button:hover {
     transform: scale(1.1);
@@ -36,12 +51,54 @@ button:active {
     width: 70px;
 }
 
-form {
+/*----------------forecast section----------------*/
+section {
+    background-color:rgba(244, 255, 254, 0.815);
+    color: #011f2c;
+    border-radius: 5px;
+}
+section h2 {
+    margin: 10px;
+    padding: 5px;
+}
+#instruction {
+    text-align: center;
+    padding: 20px;
+}
+#cityName {
+    text-align: center;
+}
+/*-----------------forecast article---------------*/
+.forecast-article {
+    background-color: #035f868f;
     display: flex;
-    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
     align-items: center;
 }
 
+.forecast-article h3 {
+    margin: 10px;
+}
+
+img {
+    width: 75px;
+}
+.icon {
+    width:30px;
+}
+.icon-container {
+    display: flex;
+}
+.pop, .humidity, .wind {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+/*----------------footer-------------------*/
 footer {
     color: rgb(2, 59, 54);
     padding: 40px 30px;
