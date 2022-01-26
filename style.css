@@ -53,13 +53,13 @@ button:active {
 }
 
 /*----------------forecast section----------------*/
-section {
+#forecast-section {
     background-color:rgba(244, 255, 254, 0.815);
     color: #011f2c;
     border-radius: 5px;
     padding: 5px;
 }
-section h2 {
+#forecast-section h2 {
     margin: 10px;
     padding: 5px;
 }
@@ -71,9 +71,13 @@ section h2 {
     text-align: center;
 }
 /*-----------------forecast article---------------*/
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
 .forecast-article {
     display: flex;
-    flex-wrap: nowrap;
     flex-direction: column;
     align-items: center;
     width: 15%;
@@ -116,6 +120,7 @@ section h2 {
     padding: 15px;
     background-color: #035f8656;
     border-radius: 0 0 5px 5px;
+    width: 100%;
 }
 .pop, .humidity, .wind {
     display: flex;
