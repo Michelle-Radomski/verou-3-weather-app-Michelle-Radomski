@@ -60,7 +60,7 @@ button:active {
 }
 
 /*----------------forecast section----------------*/
-#forecast-section {
+section {
     background-color:rgba(244, 255, 254, 0.815);
     color: #011f2c;
     border-radius: 5px;
@@ -90,7 +90,7 @@ button:active {
     width: 15%;
     margin: 10px;
     border-radius: 5px;
-    background-color: rgba(210, 230, 228, 0.815);
+    background-color: rgba(192, 214, 212, 0.815);
     box-shadow: 4px 8px 10px #035f8656; ;
 }
 
