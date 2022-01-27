@@ -41,8 +41,15 @@ form {
 
 input {
     border:3px solid #035f86;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 3px;
+    text-indent: 5px;
+    color: rgba(247, 136, 18, 1);
+}
+input:focus {
+    color: #035f86;
+    outline: 1px solid rgba(247, 136, 18, 1);
+    border: 3px solid rgba(247, 136, 18, 1);
 }
 
 button {
