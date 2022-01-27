@@ -101,6 +101,13 @@ function getWeather(event) {
             const ctx = document.getElementById('myChart').getContext('2d');
             const xHours = [];
             const temperature = [];
+            for (let j = 0; j < 24; j++) {
+                const unixTime = data.hourly[j].dt*1000;            //get unixtime in miliseconds
+                const date = new Date(unixTime).toLocaleString("en-US", {hour: "numeric"}); //converts miliseconds to hours
+                xHours.push(date);
+                const temp = Math.round(data.hourly[j].temp);
+                temperature.push(temp);
+            }
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -146,15 +153,7 @@ function getWeather(event) {
                         }
                     }
                 }
-            });
-
-            for (let j = 0; j < 24; j++) {
-                const unixTime = data.hourly[j].dt*1000;            //get unixtime in miliseconds
-                const date = new Date(unixTime).toLocaleString("en-US", {hour: "numeric"}); //converts miliseconds to hours
-                xHours.push(date);
-                const temp = Math.round(data.hourly[j].temp);
-                temperature.push(temp);
-            } 
+            }); 
         })
     })
 };
