@@ -122,6 +122,8 @@ function updateConfigByMutating(chart, xHours, temperature) {
 const ctx = document.getElementById('myChart').getContext('2d');
 const xHours = [];
 const temperature = [];
+Chart.defaults.font.family = "'Nunito', sans-serif";
+Chart.defaults.color = "#035f86";
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -147,12 +149,18 @@ const myChart = new Chart(ctx, {
                     padding: 10,
                     callback: function(value, index, ticks) {
                         return value + '\u00B0C';       //the values will have degrees C behind it
+                    },
+                    font: {
+                        weight: "bold"
                     }
                 }
             },
             x: {
                 ticks: {
-                    padding: 10
+                    padding: 10,
+                    font: {
+                        weight: "bold"
+                    }
                 },
                 grid: {
                     display: false,
@@ -169,10 +177,17 @@ const myChart = new Chart(ctx, {
         plugins: {
             title: {
                 display: true,
-                text: "24h Temperature Overview"
+                text: "24h Temperature Overview",
+                padding: 20,
+                font: {
+                    size: 20
+                }
             },
             tooltip: {
                 intersect: false
+            },
+            legend: {
+                display: false
             }
         }
     }

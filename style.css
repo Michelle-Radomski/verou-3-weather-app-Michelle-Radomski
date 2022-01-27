@@ -9,7 +9,7 @@
 body {
     min-height: 100vh;
     font-family: 'Nunito', sans-serif;
-    color: rgb(244, 255, 254);
+    color: #035f86;
     background-image: url(https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -20,6 +20,7 @@ body {
 header {
     text-align: center;
     padding: 30px;
+    color: rgb(244, 255, 254);
 }
 main {
     min-height: 100vh;
@@ -62,7 +63,6 @@ button:active {
 /*----------------forecast section----------------*/
 section {
     background-color:rgba(244, 255, 254, 0.815);
-    color: #011f2c;
     border-radius: 5px;
     padding: 5px;
     margin-bottom: 20px;
@@ -89,6 +89,7 @@ section h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #011f2c;
     width: 15%;
     margin: 10px;
     border-radius: 5px;
@@ -98,6 +99,7 @@ section h2 {
 
 .forecast-article h3 {
     margin: 10px;
+    color: #035f86;
 }
 
 .weather-icon {
@@ -115,9 +117,11 @@ section h2 {
 }
 .temperature {
     font-size: 2.5em;
+    color: rgba(247, 136, 18, 1);
 }
 .description {
     text-transform: capitalize;
+    color: rgb(1, 118, 153);
 }
 
 .icon {
@@ -143,13 +147,11 @@ section h2 {
 /*-------------------hourly forecast section----------------------*/
 .hourly-forecast-container {
     width: 60%;
-    height: auto;
     margin: 0 auto;
 }
 
 /*----------------footer-------------------*/
 footer {
-    color: rgb(2, 59, 54);
     text-align: center;
 }
 
@@ -159,6 +161,9 @@ footer {
         width: 35%;
         margin: 20px;
     }
+    .hourly-forecast-container {
+        width: 80%;
+    }
 }
 
 @media only screen and (max-width: 425px) {
@@ -167,5 +172,8 @@ footer {
     }
     .forecast-article {
         width: 60%;
+    }
+    .hourly-forecast-container {
+        width: 100%;
     }
 }
