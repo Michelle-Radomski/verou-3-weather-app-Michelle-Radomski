@@ -132,7 +132,17 @@ function getWeather(event) {
                         x: {
                             ticks: {
                                 padding: 10
+                            },
+                            grid: {
+                                display: false,
+                                tickBorderDash: 10
                             }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "24h Temperature Overview"
                         }
                     }
                 }

@@ -83,6 +83,7 @@ section h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin-bottom: 20px;
 }
 .forecast-article {
     display: flex;
