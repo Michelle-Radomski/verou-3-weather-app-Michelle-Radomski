@@ -65,8 +65,9 @@ section {
     color: #011f2c;
     border-radius: 5px;
     padding: 5px;
+    margin-bottom: 20px;
 }
-#forecast-section h2 {
+section h2 {
     margin: 10px;
     padding: 5px;
 }
@@ -136,6 +137,13 @@ section {
     justify-content: center;
     align-items: center;
     margin: 0 10px;
+}
+
+/*-------------------hourly forecast section----------------------*/
+.hourly-forecast-container {
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
 }
 
 /*----------------footer-------------------*/

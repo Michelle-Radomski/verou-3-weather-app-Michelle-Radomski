@@ -18,28 +18,22 @@ function getWeather(event) {
         const long = weatherData.city.coord.lon; //get longitude of user input
         let cityName = weatherData.city.name;
         cityNameDisplay.innerHTML = cityName;
+        pInstruction.style.display = 'none';  //hide the instruction for user in forecast
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely&units=metric&appid=" + key)
         .then(response => response.json())
         .then(data => {
             console.log(data);
 
-            pInstruction.style.display = 'none';        //hide the instruction for user in forecast
-
-            const fiveDays = data.daily.length = 5;             //the length of daily is 5 days instead of 8
-            for(let i = 0; i < fiveDays; i++) {
+            for(let i = 0; i < 5; i++) {        //the length of daily is 5 days instead of 8
                 const forecastCard = document.createElement('article');
                 forecastCard.className = "forecast-article";
                 forecastContainer.appendChild(forecastCard);
 
                 //convert date and hours into a day of the week          
-                const dateStr = data.daily[i].dt; //gives us daily date
-
-                function getDayName(dateStr, locale) {                  //will convert date into a day name
-                    const date = new Date(dateStr * 1000);
-                    return date.toLocaleDateString(locale, { weekday: 'long' });        
-                }
+                const unixTime = data.daily[i].dt; //gives us daily date
+                getDayName();               //call function
                 const forecastDay = document.createElement("h3");
-                forecastDay.innerHTML = getDayName(dateStr, "en-US");               //gives us day of the week
+                forecastDay.innerHTML = getDayName(unixTime);               //gives us day of the week
                 forecastCard.appendChild(forecastDay);
 
                 const weatherIconURL = document.createElement("img");
@@ -99,6 +93,47 @@ function getWeather(event) {
                     windContainer.appendChild(wind);
                 iconContainer.appendChild(windContainer);
             }
+        
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const xHours = [];
+            const temperature = [];
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xHours,
+                    datasets: [{
+                        label: 'Temperature overview',
+                        data: temperature,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            
+                        }
+                    }
+                }
+            });
+
+            for (let j = 0; j < 24; j++) {
+                const unixTime = data.hourly[j].dt*1000;            //get unixtime in miliseconds
+                const date = new Date(unixTime).toLocaleString("en-US", {hour: "numeric"}); //converts miliseconds to hours
+                xHours.push(date);
+                const temp = Math.round(data.hourly[j].temp);
+                temperature.push(temp);
+            } 
         })
     })
 };
+
+function getDayName(unixTime) {                  //will convert date into a day name
+    const date = new Date(unixTime * 1000).toLocaleString("en-US", { weekday: 'long' } );
+    return date;       
+}
