@@ -2,9 +2,12 @@ import {key} from "./config.js";
 
 const searchCity = document.querySelector("#searchCity");
 const search = document.querySelector("button");
-const pInstruction = document.querySelector("#instruction")
+const pInstruction = document.querySelector(".instruction");
 const cityNameDisplay = document.querySelector("#cityName");
 const forecastContainer = document.querySelector(".forecast-container");
+const chartSection = document.querySelector("#chart-section");
+
+chartSection.style.display = "none";
 
 search.addEventListener("click", getWeather);   //when user starts search we fetch necessary info
 
@@ -19,6 +22,7 @@ function getWeather(event) {
         let cityName = weatherData.city.name;
         cityNameDisplay.innerHTML = cityName;
         pInstruction.style.display = 'none';  //hide the instruction for user in forecast
+        chartSection.style.display = "block";
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely&units=metric&appid=" + key)
         .then(response => response.json())
         .then(data => {
@@ -102,21 +106,33 @@ function getWeather(event) {
                 data: {
                     labels: xHours,
                     datasets: [{
-                        label: 'Temperature overview',
+                        label: 'Temperature in' + " " + "\u00B0C",
                         data: temperature,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)'
+                            'rgba(247, 136, 18, 1)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)'
+                            'rgb(247, 136, 18, 1)'
                         ],
-                        borderWidth: 1
+                        borderWidth: 3
                     }]
                 },
                 options: {
                     scales: {
                         y: {
-                            
+                            suggestedMax: 20,
+                            suggestedMin: 0,
+                            ticks: {
+                                padding: 10,
+                                callback: function(value, index, ticks) {
+                                    return value + '\u00B0C';       //the values will have degrees C behind it
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                padding: 10
+                            }
                         }
                     }
                 }

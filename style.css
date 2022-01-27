@@ -71,7 +71,7 @@ section h2 {
     margin: 10px;
     padding: 5px;
 }
-#instruction {
+.instruction {
     text-align: center;
     padding: 20px;
 }
