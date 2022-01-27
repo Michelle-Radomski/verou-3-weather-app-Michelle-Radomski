@@ -98,9 +98,6 @@ function getWeather(event) {
                 iconContainer.appendChild(windContainer);
             }
         
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const xHours = [];
-            const temperature = [];
             for (let j = 0; j < 24; j++) {
                 const unixTime = data.hourly[j].dt*1000;            //get unixtime in miliseconds
                 const date = new Date(unixTime).toLocaleString("en-US", {hour: "numeric"}); //converts miliseconds to hours
@@ -108,55 +105,78 @@ function getWeather(event) {
                 const temp = Math.round(data.hourly[j].temp);
                 temperature.push(temp);
             }
-            const myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: xHours,
-                    datasets: [{
-                        label: 'Temperature in' + " " + "\u00B0C",
-                        data: temperature,
-                        backgroundColor: [
-                            'rgba(247, 136, 18, 1)'
-                        ],
-                        borderColor: [
-                            'rgb(247, 136, 18, 1)'
-                        ],
-                        borderWidth: 3
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            suggestedMax: 20,
-                            suggestedMin: 0,
-                            ticks: {
-                                padding: 10,
-                                callback: function(value, index, ticks) {
-                                    return value + '\u00B0C';       //the values will have degrees C behind it
-                                }
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                padding: 10
-                            },
-                            grid: {
-                                display: false,
-                                tickBorderDash: 10
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: "24h Temperature Overview"
-                        }
-                    }
-                }
-            }); 
+            updateConfigByMutating(myChart, xHours, temperature);
         })
     })
 };
+
+function updateConfigByMutating(chart, xHours, temperature) {
+    console.log(chart);
+    chart.data.labels = xHours;
+    console.log(chart.data.datasets);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = temperature;
+    });
+    chart.update();
+}
+const ctx = document.getElementById('myChart').getContext('2d');
+const xHours = [];
+const temperature = [];
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: xHours,
+        datasets: [{
+            label: 'Temperature in' + " " + "\u00B0C",
+            data: temperature,
+            backgroundColor: [
+                'rgba(247, 136, 18, 1)'
+            ],
+            borderColor: [
+                'rgb(247, 136, 18, 1)'
+            ],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                suggestedMax: 20,
+                suggestedMin: 0,
+                ticks: {
+                    padding: 10,
+                    callback: function(value, index, ticks) {
+                        return value + '\u00B0C';       //the values will have degrees C behind it
+                    }
+                }
+            },
+            x: {
+                ticks: {
+                    padding: 10
+                },
+                grid: {
+                    display: false,
+                    tickBorderDash: 10
+                }
+            }
+        },
+        elements: {
+            line: {
+                tension: 0.3,
+                borderJoinStyle: "round"
+            }
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: "24h Temperature Overview"
+            },
+            tooltip: {
+                intersect: false
+            }
+        }
+    }
+});
 
 function getDayName(unixTime) {                  //will convert date into a day name
     const date = new Date(unixTime * 1000).toLocaleString("en-US", { weekday: 'long' } );
