@@ -45,7 +45,7 @@ function getWeather(event) {
                 const weatherIconURL = document.createElement("img");
                 weatherIconURL.className = "weather-icon"
                 const weatherIcon= data.daily[i].weather[0].icon;            //gets icon that goes with description
-                weatherIconURL.src =  "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"; //gets image of icon
+                weatherIconURL.src =  "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"; //gets image of icon
                 forecastCard.appendChild(weatherIconURL);
 
                 const mainInfoContainer = document.createElement("div");

@@ -7,12 +7,14 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Nunito', sans-serif;
     color: rgb(244, 255, 254);
     background-image: url(https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 header {
@@ -20,8 +22,12 @@ header {
     padding: 30px;
 }
 main {
-    height: 100vh;
+    min-height: 100vh;
     margin: 20px 10px;
+}
+
+footer {
+    padding: 20px;
 }
 
 /*--------------form----------------*/
@@ -35,6 +41,7 @@ form {
 input {
     border:3px solid #035f86;
     border-radius: 5px;
+    padding: 3px;
 }
 
 button {
@@ -117,6 +124,7 @@ button:active {
 }
 .icon-container {
     display: flex;
+    justify-content: center;
     padding: 15px;
     background-color: #035f8656;
     border-radius: 0 0 5px 5px;
@@ -133,13 +141,22 @@ button:active {
 /*----------------footer-------------------*/
 footer {
     color: rgb(2, 59, 54);
-    padding: 40px 30px;
     text-align: center;
 }
 
 /*---------------media queries------------------*/
 @media only screen and (max-width: 768px) {
     .forecast-article {
-        width: 40%;
+        width: 35%;
+        margin: 20px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    h2 {
+        text-align: center;
+    }
+    .forecast-article {
+        width: 60%;
     }
 }
