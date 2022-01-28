@@ -45,7 +45,7 @@ function getWeather(event) {
                 const temp = Math.round(hourlyData.temp);
                 temperature.push(temp);
             }
-            updateConfigByMutating(myChart, xHours, temperature);
+            updateChartByMutating(myChart, xHours, temperature);
         })
     })
 };
@@ -125,11 +125,9 @@ function getDayName(unixTime) {                  //will convert date into a day 
     return date;       
 }
 
-function updateConfigByMutating(chart, xHours, temperature) {
-    console.log(chart);
+function updateChartByMutating(chart, xHours, temperature) {
     chart.data.labels = xHours;
-    console.log(chart.data.datasets);
-    chart.data.datasets.forEach((dataset) => {
+    chart.data.datasets.forEach((dataset) => {      //cause datasets is an array
         dataset.data = temperature;
     });
     chart.update();
