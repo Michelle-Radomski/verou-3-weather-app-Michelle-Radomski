@@ -161,6 +161,9 @@ section h2 {
 footer {
     text-align: center;
 }
+#icon-license {
+    font-size: 8px;
+}
 
 /*---------------media queries------------------*/
 @media only screen and (max-width: 768px) {
