@@ -23,6 +23,10 @@ function getWeather(event) {
         cityNameDisplay.innerHTML = cityName;
         pInstruction.style.display = 'none';  //hide the instruction for user in forecast
         chartSection.style.display = "block";
+
+        const xHours = [];
+        const temperature = [];
+
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely&units=metric&appid=" + key)
         .then(response => response.json())
         .then(data => {
@@ -120,17 +124,16 @@ function updateConfigByMutating(chart, xHours, temperature) {
     chart.update();
 }
 const ctx = document.getElementById('myChart').getContext('2d');
-const xHours = [];
-const temperature = [];
+
 Chart.defaults.font.family = "'Nunito', sans-serif";
 Chart.defaults.color = "#035f86";
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: xHours,
+        labels: "",
         datasets: [{
             label: 'Temperature in' + " " + "\u00B0C",
-            data: temperature,
+            data: "",
             backgroundColor: [
                 'rgba(247, 136, 18, 1)'
             ],
