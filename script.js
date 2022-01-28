@@ -156,6 +156,7 @@ const myChart = new Chart(ctx, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
         scales: {
             y: {
                 suggestedMax: 20,
