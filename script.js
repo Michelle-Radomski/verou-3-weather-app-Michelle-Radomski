@@ -70,52 +70,60 @@ const addCard = (data, i) => {
     const mainInfoContainer = document.createElement("div");
     mainInfoContainer.className = "main-info"
     forecastCard.appendChild(mainInfoContainer);
+    mainInfoAddContent(dailyData, mainInfoContainer);
 
-        const temperature = document.createElement("span");
-        temperature.className = "temperature";
-        temperature.innerHTML = Math.round(dailyData.temp.day) + "&deg;";   //round the number to nearest integer
-        mainInfoContainer.appendChild(temperature);
-
-        const description = document.createElement("span");
-        description.className = "description";
-        description.innerHTML = dailyData.weather[0].description;
-        mainInfoContainer.appendChild(description);
     
     const iconContainer = document.createElement("div");
     iconContainer.className = "icon-container";
     forecastCard.appendChild(iconContainer);
+    iconContainerAddContent(dailyData, iconContainer);
+        
+}
 
-        const popContainer = document.createElement("span"); //pop = chance of rain or probability of precipitation
-        popContainer.className = "pop";
-            const popImg = document.createElement("img");
-            popImg.src = "./img/rain.png";
-            popImg.className = "icon";
-        popContainer.appendChild(popImg);
-            const pop = document.createElement("span");
-            pop.innerHTML = Math.round(dailyData.pop*100) + "\u0025";
-        popContainer.appendChild(pop);
+const mainInfoAddContent = (dailyData, mainInfoContainer) => {
+    const temperature = document.createElement("span");
+    temperature.className = "temperature";
+    temperature.innerHTML = Math.round(dailyData.temp.day) + "&deg;";   //round the number to nearest integer
+    mainInfoContainer.appendChild(temperature);
+
+    const description = document.createElement("span");
+    description.className = "description";
+    description.innerHTML = dailyData.weather[0].description;
+    mainInfoContainer.appendChild(description);
+}
+
+const iconContainerAddContent = (dailyData, iconContainer) => {
+    const popContainer = document.createElement("span"); //pop = chance of rain or probability of precipitation
+    popContainer.className = "pop";
+        const popImg = document.createElement("img");
+        popImg.src = "./img/rain.png";
+        popImg.className = "icon";
+    popContainer.appendChild(popImg);
+        const pop = document.createElement("span");
+        pop.innerHTML = Math.round(dailyData.pop*100) + "\u0025";
+    popContainer.appendChild(pop);
     iconContainer.appendChild(popContainer);
 
-        const humidityContainer = document.createElement("span");
-        humidityContainer.className = "humidity";
-            const humidityImg = document.createElement("img");
-            humidityImg.src = "./img/humidity.png";
-            humidityImg.className = "icon";
-            humidityContainer.appendChild(humidityImg);
-            const humidity = document.createElement("span");
-            humidity.innerHTML = dailyData.humidity + "\u0025";
-        humidityContainer.appendChild(humidity);
+    const humidityContainer = document.createElement("span");
+    humidityContainer.className = "humidity";
+        const humidityImg = document.createElement("img");
+        humidityImg.src = "./img/humidity.png";
+        humidityImg.className = "icon";
+        humidityContainer.appendChild(humidityImg);
+        const humidity = document.createElement("span");
+        humidity.innerHTML = dailyData.humidity + "\u0025";
+    humidityContainer.appendChild(humidity);
     iconContainer.appendChild(humidityContainer);
 
-        const windContainer = document.createElement("span");
-        windContainer.className = "wind";
-            const windImg = document.createElement("img");
-            windImg.src = "./img/wind.png";
-            windImg.className = "icon";
-        windContainer.appendChild(windImg);
-            const wind = document.createElement("span");
-            wind.innerHTML = Math.round(dailyData.wind_speed) + "km/h";
-        windContainer.appendChild(wind);
+    const windContainer = document.createElement("span");
+    windContainer.className = "wind";
+        const windImg = document.createElement("img");
+        windImg.src = "./img/wind.png";
+        windImg.className = "icon";
+    windContainer.appendChild(windImg);
+        const wind = document.createElement("span");
+        wind.innerHTML = Math.round(dailyData.wind_speed) + "km/h";
+    windContainer.appendChild(wind);
     iconContainer.appendChild(windContainer);
 }
 
