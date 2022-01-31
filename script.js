@@ -56,17 +56,15 @@ function getWeather(event) {
     })
 };
 
-function addCard(data, i) {
+const addCard = (data, i) => {
     const dailyData = data.daily[i];
     const forecastCard = document.createElement('article');
     forecastCard.className = "forecast-article";
     forecastContainer.appendChild(forecastCard);
 
-    //convert date and hours into a day of the week          
-    const unixTime = dailyData.dt; //gives us daily date
-    getDayName();               //call function
+    getDayName(dailyData);
     const forecastDay = document.createElement("h3");
-    forecastDay.innerHTML = getDayName(unixTime);               //gives us day of the week
+    forecastDay.innerHTML = getDayName(dailyData);               //gives us day of the week
     forecastCard.appendChild(forecastDay);
 
     const weatherIconURL = document.createElement("img");
@@ -127,12 +125,13 @@ function addCard(data, i) {
     iconContainer.appendChild(windContainer);
 }
 
-function getDayName(unixTime) {                  //will convert date into a day name
+const getDayName = (dailyData) => { 
+    const unixTime = dailyData.dt;                 //will convert date into a day name
     const date = new Date(unixTime * 1000).toLocaleString("en-US", { weekday: 'long' } );
     return date;       
 }
 
-function updateChartByMutating(chart, xHours, temperature) {
+const updateChartByMutating = (chart, xHours, temperature) => {
     chart.data.labels = xHours;
     chart.data.datasets.forEach((dataset) => {      //cause datasets is an array
         dataset.data = temperature;
