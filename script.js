@@ -36,19 +36,19 @@ const getWeather = (event) => {
 
         fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&exclude=minutely&units=metric&appid=" + key)
         .then(response => response.json())
-        .then(data => {
-
-            for(let i = 0; i < 5; i++) {        //the length of daily is 5 days instead of 8
-                addCard(data, i);
-            }
-        
-            updateChartArray(data, xHours, temperature);
-            updateChartByMutating(myChart, xHours, temperature);
-        })
+        .then(data => processData(data, xHours, temperature))
     })
 };
 search.addEventListener("click", getWeather);   //when user starts search we fetch necessary info
 
+const processData = (data, xHours, temperature) => {
+    for(let i = 0; i < 5; i++) {        //the length of daily is 5 days instead of 8
+        addCard(data, i);
+    }
+
+    updateChartArray(data, xHours, temperature);
+    updateChartByMutating(myChart, xHours, temperature);
+}
 
 const addCard = (data, i) => {
     const dailyData = data.daily[i];
