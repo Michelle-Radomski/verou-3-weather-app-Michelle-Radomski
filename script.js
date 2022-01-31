@@ -1,26 +1,27 @@
 import {key} from "./config.js";
 
-const searchCity = document.querySelector("#searchCity");
 const search = document.querySelector("button");
-const pInstruction = document.querySelector(".instruction");
-const cityNameDisplay = document.querySelector("#cityName");
 const forecastContainer = document.querySelector(".forecast-container");
 const chartSection = document.querySelector("#chart-section");
-
 chartSection.style.display = "none";        //chart section is initially not visible
 
+const pInstructionHide = () => {
+    const pInstruction = document.querySelector(".instruction");
+    pInstruction.style.display = 'none';  //hide the instruction for user in forecast
+}
 const resetForecastSection = () => {
     forecastContainer.innerHTML = "";
 };
 
 const displayCityName = (weatherData) => {
+    const cityNameDisplay = document.querySelector("#cityName");
     let cityName = weatherData.city.name;
     cityNameDisplay.innerHTML = cityName;
 };
 
 const getWeather = (event) => {
     event.preventDefault();
-
+    const searchCity = document.querySelector("#searchCity");
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity.value + "&units=metric&appid=" + key)
     .then(response => response.json())
     .then(weatherData =>  {
@@ -28,7 +29,7 @@ const getWeather = (event) => {
         const lat = weatherData.city.coord.lat; //get latitude of user input
         const long = weatherData.city.coord.lon; //get longitude of user input
         displayCityName(weatherData);
-        pInstruction.style.display = 'none';  //hide the instruction for user in forecast
+        pInstructionHide();
         chartSection.style.display = "block";
 
         const xHours = [];            //labels for chart
