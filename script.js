@@ -16,10 +16,9 @@ const resetForecastSection = () => {
 const displayCityName = (weatherData) => {
     let cityName = weatherData.city.name;
     cityNameDisplay.innerHTML = cityName;
-}
-search.addEventListener("click", getWeather);   //when user starts search we fetch necessary info
+};
 
-function getWeather(event) {
+const getWeather = (event) => {
     event.preventDefault();
 
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity.value + "&units=metric&appid=" + key)
@@ -43,18 +42,13 @@ function getWeather(event) {
                 addCard(data, i);
             }
         
-            for (let j = 0; j < 24; j++) {
-                const hourlyData = data.hourly[j];
-                const unixTime = hourlyData.dt*1000;            //get unixtime in miliseconds
-                const date = new Date(unixTime).toLocaleString("en-US", {hour: "numeric"}); //converts miliseconds to hours
-                xHours.push(date);
-                const temp = Math.round(hourlyData.temp);
-                temperature.push(temp);
-            }
+            updateChartArray(data, xHours, temperature);
             updateChartByMutating(myChart, xHours, temperature);
         })
     })
 };
+search.addEventListener("click", getWeather);   //when user starts search we fetch necessary info
+
 
 const addCard = (data, i) => {
     const dailyData = data.daily[i];
@@ -130,6 +124,17 @@ const getDayName = (dailyData) => {
     const date = new Date(unixTime * 1000).toLocaleString("en-US", { weekday: 'long' } );
     return date;       
 }
+
+const updateChartArray = (data, xHours, temperature) => {
+    for (let j = 0; j < 24; j++) {
+        const hourlyData = data.hourly[j];
+        const unixTime = hourlyData.dt*1000;            //get unixtime in miliseconds
+        const date = new Date(unixTime).toLocaleString("en-US", {hour: "numeric"}); //converts miliseconds to hours
+        xHours.push(date);
+        const temp = Math.round(hourlyData.temp);
+        temperature.push(temp);
+    }
+};
 
 const updateChartByMutating = (chart, xHours, temperature) => {
     chart.data.labels = xHours;
