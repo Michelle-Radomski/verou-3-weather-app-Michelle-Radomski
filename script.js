@@ -9,6 +9,14 @@ const chartSection = document.querySelector("#chart-section");
 
 chartSection.style.display = "none";        //chart section is initially not visible
 
+const resetForecastSection = () => {
+    forecastContainer.innerHTML = "";
+};
+
+const displayCityName = (weatherData) => {
+    let cityName = weatherData.city.name;
+    cityNameDisplay.innerHTML = cityName;
+}
 search.addEventListener("click", getWeather);   //when user starts search we fetch necessary info
 
 function getWeather(event) {
@@ -17,11 +25,10 @@ function getWeather(event) {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity.value + "&units=metric&appid=" + key)
     .then(response => response.json())
     .then(weatherData =>  {
-        forecastContainer.innerHTML = "";       //forecast section will be cleared with each new search
+        resetForecastSection();
         const lat = weatherData.city.coord.lat; //get latitude of user input
         const long = weatherData.city.coord.lon; //get longitude of user input
-        let cityName = weatherData.city.name;
-        cityNameDisplay.innerHTML = cityName;
+        displayCityName(weatherData);
         pInstruction.style.display = 'none';  //hide the instruction for user in forecast
         chartSection.style.display = "block";
 
@@ -33,8 +40,7 @@ function getWeather(event) {
         .then(data => {
 
             for(let i = 0; i < 5; i++) {        //the length of daily is 5 days instead of 8
-                const dailyData = data.daily[i];
-                addCard(dailyData);
+                addCard(data, i);
             }
         
             for (let j = 0; j < 24; j++) {
@@ -50,7 +56,8 @@ function getWeather(event) {
     })
 };
 
-function addCard(dailyData) {
+function addCard(data, i) {
+    const dailyData = data.daily[i];
     const forecastCard = document.createElement('article');
     forecastCard.className = "forecast-article";
     forecastContainer.appendChild(forecastCard);
