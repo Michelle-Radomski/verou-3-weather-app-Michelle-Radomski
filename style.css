@@ -106,7 +106,13 @@ section h2 {
 
 .forecast-article h3 {
     margin: 10px;
+    margin-bottom: 0;
     color: #035f86;
+}
+
+.forecast-article .date {
+    color:rgba(247, 136, 18, 1);
+    font-size: 0.9em;
 }
 
 .weather-icon {
